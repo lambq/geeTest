@@ -1,10 +1,10 @@
 <?php
 
-namespace Lamb\GeeTest;
+namespace Lambq\GeeTest;
 
 use Illuminate\Support\ServiceProvider;
 
-class GeetestProvider extends ServiceProvider
+class GeeTestProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
