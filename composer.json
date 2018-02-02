@@ -14,5 +14,5 @@
         "psr-4": {
             "Lamb\\GeeTest\\": "src/"
         }
-    },
+    }
 }
