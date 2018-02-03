@@ -17,6 +17,7 @@ class GeeTestProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/lamb.php' => config_path('lamb.php'),
         ]);
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
 
     /**
