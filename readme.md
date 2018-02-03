@@ -15,5 +15,5 @@ Lambq\GeeTest\GeeTestProvider::class
 ### 发布配置
 > 在命令行输入下面代码
 ```shell
-php artisan vendor:publish
+php artisan vendor:publish --provider="Lambq\GeeTest\GeeTestProvider"
 ```
