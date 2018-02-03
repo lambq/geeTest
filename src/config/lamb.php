@@ -6,8 +6,6 @@
  * Time: 下午8:12
  */
 return [
-    'baidu_push_zz_site'    => '',
-    'baidu_push_zz_token'   => '',
-    'zz_api'                => '',
-    'zz_host'               => '',
+    'id'    => '',
+    'key'   => '',
 ];

@@ -27,5 +27,8 @@ class GeeTestProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton('captcha',function(){
+            return new GeeCaptcha(config('lamb.id'),config('lamb.key'));
+        });
     }
 }
