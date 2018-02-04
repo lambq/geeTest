@@ -17,3 +17,12 @@ Lambq\GeeTest\GeeTestProvider::class
 ```shell
 php artisan vendor:publish --provider="Lambq\GeeTest\GeeTestProvider"
 ```
+
+### 配置geetest极验
+> 请把申请好的极验ID和KEY填写到 config/lamb.php 文件里面
+```php
+return [
+    'id'    => 'xxxxx',
+    'key'   => 'xxxxx',
+];
+```
