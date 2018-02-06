@@ -2,6 +2,7 @@
 
 namespace Lambq\GeeTest;
 
+use Illuminate\Http\Request;
 /**
  * Class GeeCaptcha.
  */
@@ -20,44 +21,48 @@ class GeeCaptcha extends GeetestLib
     }
 
     /**
+     * @param  \Illuminate\Http\Request  $request
      * @return bool|mixed|string
      *
      * 判断验证是否成功
      */
-    public function success()
+    public function success(Request $request)
     {
         $data = [
-            "user_id" => "test", # 网站用户id
+            "user_id" => $request->user()->id."_yun", # 网站用户id
             "client_type" => "web", #web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
-            "ip_address" => "127.0.0.1" # 请在此处传输用户请求验证时所携带的IP
+            "ip_address" => $request->getClientIp() # 请在此处传输用户请求验证时所携带的IP
         ];
-        $result = $this->success_validate($_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode'],$data);
+        $result = $this->success_validate($request->get('geetest_challenge'), $request->get('geetest_validate'), $request->get('geetest_seccode'),$data);
 
         return $result;
     }
 
     /**
+     * @param  \Illuminate\Http\Request  $request
      * @return int
      *
      * GT 服务器是否有回应
      */
-    public function hasAnswer()
+    public function hasAnswer(Request $request)
     {
-        return $this->fail_validate($_POST['geetest_challenge'],$_POST['geetest_validate'],$_POST['geetest_seccode']);
+        return $this->fail_validate($request->get('geetest_challenge'), $request->get('geetest_validate'), $request->get('geetest_seccode'));
     }
 
     /**
+     *
+     * @param  \Illuminate\Http\Request  $request
      * @return mixed
      *
      * 判断GT 服务器是否正常
      */
-    public function GTServerIsNormal()
+    public function GTServerIsNormal(Request $request)
     {
         session_start();
         $data = [
-            "user_id" => "test", # 网站用户id
+            "user_id" => $request->user()->id."_yun", # 网站用户id
             "client_type" => "web", #web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
-            "ip_address" => "127.0.0.1" # 请在此处传输用户请求验证时所携带的IP
+            "ip_address" => $request->getClientIp() # 请在此处传输用户请求验证时所携带的IP
         ];
         $status = $this->pre_process($data,1);
         $_SESSION['gtserver'] = $status;
