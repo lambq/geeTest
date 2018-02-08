@@ -2,7 +2,6 @@
 
 namespace Lambq\GeeTest;
 
-use Illuminate\Http\Request;
 /**
  * Class GeeCaptcha.
  */
@@ -28,11 +27,11 @@ class GeeCaptcha extends GeetestLib
     public function success()
     {
         $data = [
-            "user_id" => request()->id()."_yun", # 网站用户id
+            "user_id" => "test", # 网站用户id
             "client_type" => "web", #web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
-            "ip_address" => request()->ip() # 请在此处传输用户请求验证时所携带的IP
+            "ip_address" => "127.0.0.1" # 请在此处传输用户请求验证时所携带的IP
         ];
-        $result = $this->success_validate(request()->input('geetest_challenge'), request()->input('geetest_validate'), request()->input('geetest_seccode'),$data);
+        $result = $this->success_validate($_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode'],$data);
 
         return $result;
     }
@@ -44,11 +43,10 @@ class GeeCaptcha extends GeetestLib
      */
     public function hasAnswer()
     {
-        return $this->fail_validate(request()->input('geetest_challenge'), request()->input('geetest_validate'), request()->input('geetest_seccode'));
+        return $this->fail_validate($_POST['geetest_challenge'],$_POST['geetest_validate'],$_POST['geetest_seccode']);
     }
 
     /**
-     *
      * @return mixed
      *
      * 判断GT 服务器是否正常
@@ -57,9 +55,9 @@ class GeeCaptcha extends GeetestLib
     {
         session_start();
         $data = [
-            "user_id" => request()->id()."_yun", # 网站用户id
+            "user_id" => "test", # 网站用户id
             "client_type" => "web", #web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
-            "ip_address" => request()->ip() # 请在此处传输用户请求验证时所携带的IP
+            "ip_address" => "127.0.0.1" # 请在此处传输用户请求验证时所携带的IP
         ];
         $status = $this->pre_process($data,1);
         $_SESSION['gtserver'] = $status;
